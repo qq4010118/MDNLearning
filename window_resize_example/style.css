@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+}
+
+div {
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    background-image: url('bgtile.png');
+    border: 10px solid white;
+}

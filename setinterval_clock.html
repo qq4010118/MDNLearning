@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Simple setInterval clock</title>
+    <style>
+      p {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="clock"></p>
+    <p><button class="startBtn">Start</button>
+        <button class="stopBtn">Stop</button>
+        <button class="resetBtn">Reset</button>
+    </p>
+    
+    
+
+    <script>
+      let startTime = 0;
+      let time = 0;
+      let lastTime = 0;
+      let startBtn = document.querySelector('.startBtn');
+      let stopBtn = document.querySelector('.stopBtn');
+      let resetBtn = document.querySelector('.resetBtn');
+      let createClock = null;
+      let newStart = true;
+      
+
+      stopBtn.disabled = true;
+      resetBtn.disabled = true;
+
+      startBtn.addEventListener('click', function(){
+        
+        
+        startTime = Date.now();
+        createClock = setInterval(displayTime, 10);
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        resetBtn.disabled = false;
+      });
+
+      stopBtn.addEventListener('click', function(){
+          
+          stopTime();
+          startBtn.disabled = false;
+          stopBtn.disabled = true;
+          resetBtn.disabled = false;
+      });
+
+      resetBtn.addEventListener('click', resetTime);
+
+      function displayTime() {
+        
+        
+        if(newStart){
+            time = Math.floor((Date.now() - startTime) / 1000);  
+        } else{
+            time = lastTime + Math.floor((Date.now() - startTime) / 1000);
+        }
+
+        document.querySelector('.clock').textContent = timeResult(time);
+      }
+
+      function stopTime() {   
+        lastTime = time;
+        newStart = false;
+        clearInterval(createClock);
+      }
+
+      function resetTime() {
+
+        startTime = Date.now();
+        newStart = true;
+        if(stopBtn.disabled === false){
+            clearInterval(createClock);
+            time = 0;
+            document.querySelector('.clock').textContent = timeResult(time);
+            createClock = setInterval(displayTime, 1000);
+
+        } else{
+            time = 0;
+            document.querySelector('.clock').textContent = timeResult(time);
+            resetBtn.disabled = true;
+        }
+      }
+
+      function timeResult(time){
+          let hours = Math.floor(time/3600);
+          let minutes = Math.floor(time%3600/60);
+          let seconds = Math.floor(time%60);
+          let result = "::";
+
+          let displayHours = (hours < 10) ? `0${hours}` : `${hours}`;
+          let displayMinutes = (minutes < 10) ? `0${minutes}` : `${minutes}`;
+          let displaySeconds = (seconds < 10) ? `0${seconds}` : `${seconds}`;
+
+          result = `${displayHours}:${displayMinutes}:${displaySeconds}`;
+          return result;
+      }
+
+      document.querySelector('.clock').textContent = timeResult(time);
+      
+
+
+    </script>
+  </body>
+</html>
