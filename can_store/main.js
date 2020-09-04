@@ -160,11 +160,11 @@ function initialize(products) {
     // display it
 
 
-   
 
 
 
-    
+
+
 
     function fetchBlob(product) {
         // construct the URL path to the image file from the product.image property
@@ -178,7 +178,7 @@ function initialize(products) {
         request.open('GET', url);
         request.responseType = 'blob';
         request.onload = function () {
-            if(request.status === 200){
+            if (request.status === 200) {
                 let blob = request.response;
                 let objectURL = URL.createObjectURL(blob);
                 showProduct(objectURL, product);
