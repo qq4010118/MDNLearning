@@ -1,0 +1,7 @@
+!!! This example need to change one line code so that it can run correctly. !!!
+
+1.We only need to change one line code in "main.js" file.
+
+2.The code need to be changed is followed by a comment that include many "~", like "~~~~~~~~~~~~~~~~~~~~~" in line 30. 
+
+Have fun and wish you a good luck! >.0/
